@@ -1,6 +1,11 @@
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import React, {useState} from 'react'
+import axios from 'axios';
+
+
+
 const API_BASE_URL = 'https://api.dev.returnredirect.com';
+
 
 
 const Signup = ({navigation})=> {
@@ -19,46 +24,34 @@ const Signup = ({navigation})=> {
     if (password !== confirmPassword) {
       Alert.alert('Error', 'Passwords do not match');
       return;
-    }
-
-    try{
-      const response = await fetch(`${API_BASE_URL}/api/1.0/auth/signup`,{
-       method:'POST',
-       headers:{
-           'Content-Type': 'application/json',
-           'device-id': 'd12121',
-           'app-type': 'web'
-       },
-       body:JSON.stringify({
-           name,
-           email,
-           password,
-           confirmPassword
-       })
-      })
-      const data = await response.json()
-      if(response){
-       navigation.navigate("login")
-       console.log("signup succesful");
-       
-      }else{
-       console.log("fail");
-      }
-   }catch(err){
-       console.log(err);
    }
 
-    // Perform sign-up logic here
-    // console.log('Signing up with:', name, email, password);
+   try {
+    const response = await axios.post(`${API_BASE_URL}/api/1.0/auth/signup`, {
 
-    // Reset input fields after sign-up
-    setName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
+      headers: {
+        'Content-Type': 'application/json',
+        'device-id': 'd12121',
+        'app-type': 'web'
+     },  body:JSON.stringify({
+      name: name,
+      email: email,
+       password: password,
+       confirmPassword:confirmPassword
+     })
+     
+     });
 
-    // Show success message or navigate to another screen
-    Alert.alert('Success', 'Sign-up successful!');
+     const data = await response.json()
+         if(response){
+          navigation.navigate("login")
+          console.log("signup succesful");
+  } else {
+    console.log("signup faild");
+  } }catch(err){
+        console.log(err);
+    }
+
   };
 
 

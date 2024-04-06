@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, ImageBackground, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Landing from './Landing';
 
 const Start = ({navigation})=>{
 const [isfirst, setIsFirst] = useState(false)
@@ -20,7 +21,7 @@ const [isfirst, setIsFirst] = useState(false)
   };
 
   const handleButtonClick = () => {
-    navigation.navigate('login');
+    navigation.navigate('landing');
   };
 
 
@@ -41,6 +42,7 @@ const [isfirst, setIsFirst] = useState(false)
           <Text style={styles.para}>The best grin the finest roast,the {"\n"} powerful flavor.</Text>
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText} onPress={handleButtonClick}>Get Started</Text>
+        
           </TouchableOpacity>
         </View>
       </ImageBackground>

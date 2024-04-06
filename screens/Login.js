@@ -25,36 +25,30 @@ const Login = ({navigation}) => {
 
       try {
         const response = await axios.post(`${API_BASE_URL}/api/1.0/auth/login`, {
-          email: email,
-           password: password,
-         }, {
           headers: {
             'Content-Type': 'application/json',
             'device-id': 'd12121',
             'app-type': 'web'
       //       // You can add other headers if required
-         },
-      //     // You can add other options such as timeout, etc.
-         });
-    
-      //   // Handle successful response
-       console.log('Login successful:', response.data);
-        return response.data;
-      }  catch (error) {
-         // Handle error
-       console.error('Login failed:', error);
-         if (error.response) {
-           console.error('Response data:', error.response.data);
-        }
-        throw error;
-       }
-
-
+         },body: JSON.stringify({
+          
+          email: email,
+           password: password,
+         }) 
+        })
+  if(response){
+    console.log("login succefully");
+    setEmail("")
+    setPassword("")
+  }else{
+    console.log("login faild");
+  }}catch (error){
+    console.log(error);
+  }
       
-
-    }
+      
    
-    
+} 
     
    
 
