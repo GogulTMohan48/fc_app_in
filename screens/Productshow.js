@@ -1,10 +1,9 @@
- import {View, Text, FlatList, StyleSheet,ScrollView,TouchableOpacity,ActivityIndicator,Image } from 'react-native'
+ import {View, Text, FlatList, StyleSheet,TouchableOpacity,ActivityIndicator,Image,ScrollView } from 'react-native'
  import axios from 'axios';
  import React, {  useState,useEffect } from 'react';
  import FontAwesome from 'react-native-vector-icons/FontAwesome';
  import Entypo from 'react-native-vector-icons/Entypo';
  import AntDesign from 'react-native-vector-icons/AntDesign'
-//  import Landing from './Landing';
 
 
 
@@ -55,24 +54,17 @@
     }
   }, [searchQuery, data]);
 
-// /
-// const handleSearch = (searchQuery) => {
-//     // Filter products based on search query
-//     const filtered = data.filter(item=>
-//       item.title.toLowerCase().includes(searchQuery.toLowerCase())
-//     );
-//     setFilter(filtered);
-//   };
+
 
  
     
   return (
       <>
-         <ScrollView horizontal style={styles.scroll}>
+         <View  style={styles.scroll}>
   
   
   
-            { <FlatList
+            { <FlatList  horizontal
               data={data}
              renderItem={({ item }) => (
               <TouchableOpacity style={styles.button}>
@@ -81,16 +73,15 @@
   
               )}
                keyExtractor={item => item.id.toString()}
-               numColumns={30} // Number of columns in the grid
-            columnWrapperStyle={styles.columnWrapper}
+            
   
             /> }
   
-          </ScrollView>
+          </View>
 
-    <ScrollView contentContainerStyle={styles.cont} horizontal={false}>
+
      { 
-   <FlatList
+   <FlatList contentContainerStyle={styles.cont} 
      data={filteredData}
     renderItem={({ item }) => (
        <TouchableOpacity style={styles.imgbut}>
@@ -121,7 +112,7 @@
  }
 
 
-    </ScrollView>
+   
       </>
     )
 
@@ -165,7 +156,7 @@
           justifyContent: 'space-between',
         },
         scroll:{
-           height:180,
+           height:140,
            marginTop:8
           
        
